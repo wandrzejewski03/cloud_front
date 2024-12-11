@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Comic Translator</h1>
+    <p>Upload your comic page to translate text from English to Turkish.</p>
+
+
+
+
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        {{ form.file() }}
+        {{ form.submit() }}
+
+    </form>
+
+    {% if message %}
+    <p class="message">{{ message }}</p>
+    {% endif %}
+
+    {% if file_path %}
+    <div class="file-preview">
+        <img src="{{ url_for('static', filename=file_path.split('static/')[-1]) }}" alt="Uploaded File" class="file-thumbnail">
+    <form method="POST">
+        <input type="hidden" name="current_file" value="{{ file_path }}">
+        {{ form.submit_delete() }}
+    </form>
+    </div>
+    {% endif %}
+
+
+
+</div>
+{% endblock %}
